@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             
             $table->string('name');
-            $table->string('descripcion');
+            $table->string('description');
             $table->string('barcode')->unique();
             $table->decimal('price', 10, 2);
             $table->decimal('public_price', 10,2);
