@@ -2,11 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Variants;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Products extends Model
 {
     use HasFactory;
-    use SoftDeletingTrait;
+    use SoftDeletes;
+
+    /**
+     * Get the variants for the Product.
+     */
+    public function variants()
+    {
+        return $this->hasMany(Variants::class);
+    }
 }
