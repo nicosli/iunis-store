@@ -14,8 +14,8 @@ class AddProductVariant extends Migration
     public function up()
     {
         Schema::table('variants', function (Blueprint $table) {
-            $table->unsignedInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedInteger('products_id')->after('id');
+            $table->foreign('products_id')->references('id')->on('products');
         });
     }
 

@@ -10,7 +10,10 @@ class ProductsController extends Controller
 {
     public function show(){
         return Inertia::render('Products/Show', [
-            'products' => Products::all()
+            'products' => Products::with('variants')
+                       //->with('providers')
+                       ->orderBy('id', 'desc')
+                       ->paginate(10)
         ]);
     }
 }

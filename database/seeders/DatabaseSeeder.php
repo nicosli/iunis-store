@@ -68,17 +68,14 @@ class DatabaseSeeder extends Seeder
         Providers::factory()->count(50)->create();
 
         /**
-         * Add variants
-         */
-        Variants::factory()->count(15)->create();
-
-        
-        
-        
-        /**
          * Add products
          */
-        Products::factory()->count(300)->create();
+        Products::factory()->count(150)->create();
+
+        /**
+         * Add variants
+         */
+        Variants::factory()->count(500)->create();
 
     }
 }
