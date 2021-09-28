@@ -14,6 +14,9 @@
             <th scope="col" class="relative px-6 py-3">
                 <span class="sr-only">Edit</span>
             </th>
+            <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Remove</span>
+            </th>
         </thead>
         <tbody>
             <tr v-for="(product, key) in products" :key="key">
@@ -41,6 +44,11 @@
                     Details
                 </button>
               </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <button v-on:click="deleteProduct(product)" class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+                    Delete
+                </button>
+              </td>
             </tr>
         </tbody>
         </table>
@@ -52,6 +60,9 @@
       methods: {
         showDetails(product){
           this.$emit('showDetails', product)
+        },
+        deleteProduct(product){
+          this.$emit('delete', product)
         }
       },
       props: {

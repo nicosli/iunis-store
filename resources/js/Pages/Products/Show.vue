@@ -8,14 +8,17 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <table-data :products="products.data" @showDetails="showDetails"></table-data>
+                    <table-data :products="products.data" @showDetails="showDetails" @delete="deleteProduct"></table-data>
                     <div class="p-3">
                         <pagination class="mt-6" :links="products.links" />
                     </div>
                 </div>
             </div>
         </div>
+        
         <details-modal :product="productSelected" @closeModal="closeModal"/>
+        <delete-action :product="productSelectedDelete" @closeConfirm="closeConfirm"/>
+
     </app-layout>
 </template>
 
@@ -25,19 +28,23 @@
     import TableData from './TableData'
     import Pagination from '@/Components/Pagination'
     import DetailsModal from './DetailsModal'
+    import DeleteAction from './DeleteAction'
 
     export default {
         data() {
             return {
                 productSelected: {},
-                showModal: false
+                productSelectedDelete: {},
+                showModal: false,
+                showConfirm: false,
             }
         },
         components: {
             AppLayout,
             TableData,
             Pagination,
-            DetailsModal
+            DetailsModal,
+            DeleteAction
         },
         props: {
             products: Object,
@@ -49,6 +56,13 @@
             },
             closeModal(){
                 this.productSelected = {}
+            },
+            closeConfirm(){
+                this.productSelectedDelete = {}
+            },
+            deleteProduct(product){
+                this.productSelectedDelete = product
+                this.showConfirm = true
             }
         }
     }
