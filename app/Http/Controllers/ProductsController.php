@@ -24,4 +24,19 @@ class ProductsController extends Controller
         $product->delete();
         return back(303);
     }
+
+    public function edit(Request $request){
+        $product = Products::find($request->input('product'));
+        
+        $product->name = $request->input('name');
+        $product->image = $request->input('image');
+        $product->barcode = $request->input('barcode');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->public_price = $request->input('public_price');
+        $product->stock = $request->input('stock');
+        $product->save();
+
+        return back(303);
+    }
 }

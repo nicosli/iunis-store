@@ -8,7 +8,12 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <table-data :products="products.data" @showDetails="showDetails" @delete="deleteProduct"></table-data>
+                    <table-data 
+                        :products="products.data" 
+                        @showDetails="showDetails" 
+                        @delete="deleteProduct" 
+                        @showEditModal="showEditModalEvent" />
+
                     <div class="p-3">
                         <pagination class="mt-6" :links="products.links" />
                     </div>
@@ -18,7 +23,8 @@
         
         <details-modal :product="productSelected" @closeModal="closeModal"/>
         <delete-action :product="productSelectedDelete" @closeConfirm="closeConfirm"/>
-
+        <edit-action :product="productSelectedEdit" @closeModal="closeEditModalEvent" />
+        
     </app-layout>
 </template>
 
@@ -29,14 +35,15 @@
     import Pagination from '@/Components/Pagination'
     import DetailsModal from './DetailsModal'
     import DeleteAction from './DeleteAction'
+    import EditAction from './EditAction'
 
     export default {
         data() {
             return {
                 productSelected: {},
                 productSelectedDelete: {},
-                showModal: false,
-                showConfirm: false,
+                productSelectedEdit: {},
+                showEditModal: false,
             }
         },
         components: {
@@ -44,14 +51,14 @@
             TableData,
             Pagination,
             DetailsModal,
-            DeleteAction
+            DeleteAction,
+            EditAction
         },
         props: {
             products: Object,
         },
         methods: {
             showDetails(product){
-                this.showModal = true
                 this.productSelected = product
             },
             closeModal(){
@@ -62,7 +69,12 @@
             },
             deleteProduct(product){
                 this.productSelectedDelete = product
-                this.showConfirm = true
+            },
+            closeEditModalEvent(){
+                this.productSelectedEdit = {}
+            },
+            showEditModalEvent(product){
+                this.productSelectedEdit = product
             }
         }
     }
