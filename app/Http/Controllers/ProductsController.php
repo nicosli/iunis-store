@@ -12,7 +12,8 @@ class ProductsController extends Controller
     public function show(){
         return Inertia::render('Products/Show', [
             'products' => Products::with('variants')
-                       //->with('providers')
+                       ->with('provider')
+                       ->with('category')
                        ->orderBy('id', 'desc')
                        ->paginate(10)
         ]);

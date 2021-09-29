@@ -27,7 +27,7 @@
                       {{product.name}} {{product.id}}
                     </div>
                     <div class="text-sm text-gray-500">
-                      {{product.created_at}}
+                      {{product.category.name}}
                     </div>
                   </div>
                 </div>

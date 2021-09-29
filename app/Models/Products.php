@@ -22,13 +22,13 @@ class Products extends Model
         return $this->hasMany(Variants::class);
     }
 
-    public function providers()
+    public function provider()
     {
         return $this->hasOne(Providers::class);
     }
 
     public function category()
     {
-        return $this->hasOne(Categories::class);
+        return $this->belongsTo(Categories::class);
     }
 }
