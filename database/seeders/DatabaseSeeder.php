@@ -63,14 +63,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         /**
-         * Add Providers
-         */
-        Providers::factory()->count(50)->create();
-
-        /**
          * Add products
+         * With relationship to Providers
          */
-        Products::factory()->count(150)->create();
+        Products::factory()
+            ->has(Providers::factory()->count(1))
+            ->count(150)
+            ->create();
 
         /**
          * Add variants

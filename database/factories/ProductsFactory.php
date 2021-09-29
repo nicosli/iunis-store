@@ -34,8 +34,7 @@ class ProductsFactory extends Factory
             'stars' => rand(1, 5),
             'barcode' => $this->faker->unique()->ean13(),
             'image' => $this->faker->imageUrl($width = 400, $height = 400),
-            'category_id' => rand(1, Categories::count()), 
-            'provider_id' => rand(1, Providers::count())
+            'category_id' => rand(1, Categories::count())
         ];
     }
 }

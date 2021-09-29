@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Variants;
 use App\Models\Providers;
+use App\Models\Categories;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,5 +25,10 @@ class Products extends Model
     public function providers()
     {
         return $this->hasOne(Providers::class);
+    }
+
+    public function category()
+    {
+        return $this->hasOne(Categories::class);
     }
 }

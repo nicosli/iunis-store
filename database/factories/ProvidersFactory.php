@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Products;
 use App\Models\Providers;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,6 +27,7 @@ class ProvidersFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->safeEmail(),
             'address' => $this->faker->address(),
+            'products_id' => rand(1, Products::count())
         ];
     }
 }
