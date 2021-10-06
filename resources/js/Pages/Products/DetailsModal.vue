@@ -33,7 +33,7 @@
                                     </span>
                                 </div>
                                 <div class="leading-relaxed">{{product.description}}</div>
-                                <div class="mt-5">
+                                <div class="mt-5" v-if="product.provider">
                                     <div class="text-sm title-font text-gray-500 tracking-widest">PROVIDER </div>
                                     {{product.provider.name}}
                                 </div>

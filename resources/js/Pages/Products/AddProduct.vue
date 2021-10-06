@@ -2,7 +2,7 @@
     <div>
         <jet-dialog-modal :show="showModal" @close="closeModal">
             <template #title>
-                Edit Product
+                Add Product
             </template>
 
             <template #content>
@@ -13,27 +13,31 @@
                             <jet-input
                                 id="name"
                                 type="text"
-                                class="block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                :class="[$page.props.errors.name ? 'border border-red-300' : 'border border-gray-200', 'block w-full bg-gray-100 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']"
                                 v-model="form.name"
                                 autocomplete="off"
                             />
+                            <div class="text-red-500" v-if="$page.props.errors.name">{{ $page.props.errors.name }}</div>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
                             <jet-label for="barcode" value="Barcode" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"/>
                             <jet-input
                                 id="barcode"
                                 type="text"
-                                class="block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                :class="[$page.props.errors.barcode ? 'border border-red-300' : 'border border-gray-200', 'block w-full bg-gray-100 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']"
                                 v-model="form.barcode"
                                 autocomplete="off"
                             />
+                            <div class="text-red-500" v-if="$page.props.errors.barcode">{{ $page.props.errors.barcode }}</div>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <jet-label for="description" value="Description" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"/>
-                            <textarea v-model="form.description" class="block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="description" rows="5" cols="50"></textarea>
-                            <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
+                            <textarea v-model="form.description" 
+                            :class="[$page.props.errors.description ? 'border border-red-300' : 'border border-gray-200', 'block w-full bg-gray-100 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']"
+                            name="description" rows="5" cols="50"></textarea>
+                            <div class="text-red-500" v-if="$page.props.errors.description">{{ $page.props.errors.description }}</div>
                         </div>
                     </div>
                     <div class="-mx-3 mb-6">
@@ -42,10 +46,11 @@
                             <jet-input
                                 id="image"
                                 type="text"
-                                class="block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                :class="[$page.props.errors.image ? 'border border-red-300' : 'border border-gray-200', 'block w-full bg-gray-100 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']"
                                 v-model="form.image"
                                 autocomplete="off"
                             />
+                            <div class="text-red-500" v-if="$page.props.errors.image">{{ $page.props.errors.image }}</div>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-2">
@@ -53,31 +58,34 @@
                             <jet-label for="price" value="Price" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"/>
                             <jet-input
                                 id="price"
-                                type="text"
-                                class="block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                type="number"
+                                :class="[$page.props.errors.price ? 'border border-red-300' : 'border border-gray-200', 'block w-full bg-gray-100 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']"
                                 v-model="form.price"
                                 autocomplete="off"
                             />
+                            <div class="text-red-500" v-if="$page.props.errors.price">{{ $page.props.errors.price }}</div>
                         </div>
                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <jet-label for="public_price" value="Public Price" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"/>
                             <jet-input
                                 id="public_price"
-                                type="text"
-                                class="block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                type="number"
+                                :class="[$page.props.errors.public_price ? 'border border-red-300' : 'border border-gray-200', 'block w-full bg-gray-100 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']"
                                 v-model="form.public_price"
                                 autocomplete="off"
                             />
+                            <div class="text-red-500" v-if="$page.props.errors.public_price">{{ $page.props.errors.public_price }}</div>
                         </div>
                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <jet-label for="stock" value="Stock" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"/>
                             <jet-input
                                 id="stock"
-                                type="text"
-                                class="block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                type="number"
+                                :class="[$page.props.errors.stock ? 'border border-red-300' : 'border border-gray-200', 'block w-full bg-gray-100 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']"
                                 v-model="form.stock"
                                 autocomplete="off"
                             />
+                            <div class="text-red-500" v-if="$page.props.errors.stock">{{ $page.props.errors.stock }}</div>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-2 mt-6">
@@ -155,50 +163,35 @@
         },
         data() {
             return {
-                form: {},
-                showModal: false
+                form: this.$inertia.form({
+                    name: '',
+                    barcode: '',
+                    description: '',
+                    image: '',
+                    price: '',
+                    public_price: '',
+                    stock: '',
+                    reviews: '',
+                    stars: '',
+                    category: '',
+                }),
             }
         },
         props: {
-            product:{
-                type: Object,
+            showModal:{
+                type: Boolean,
                 required: true,
             }
         },
         methods: {
             closeModal(){
-                this.showModal = false
                 this.$emit('closeModal')
             },
             proceedToSave(){
-                this.form.post(route('product.edit', {
-                    product: this.product.id
-                }), {
+                this.form.post(route('product.add'), {
                     preserveScroll: true,
                     onSuccess: () => this.closeModal()
                 })
-            }
-        },
-        watch: {
-            product: function(n, o){
-                if( ! isEmpty(n) ){
-                    
-                    this.form = this.$inertia.form({
-                        name: this.product.name,
-                        barcode: this.product.barcode,
-                        description: this.product.description,
-                        image: this.product.image,
-                        price: this.product.price,
-                        public_price: this.product.public_price,
-                        stock: this.product.stock,
-                        reviews: this.product.reviews,
-                        stars: this.product.stars,
-                        category: this.product.category.id,
-
-                    })
-
-                    this.showModal = true
-                }
             }
         }
     }

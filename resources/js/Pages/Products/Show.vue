@@ -1,9 +1,16 @@
 <template>
     <app-layout title="Dashboard">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Products
-            </h2>
+            <div class="flex justify-between">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    Products
+                </h2>
+                <button
+                    v-on:click="showModalAddProduct()"
+                    class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded text-sm">
+                    Add Product
+                </button>
+            </div>
         </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -24,6 +31,7 @@
         <details-modal :product="productSelected" @closeModal="closeModal"/>
         <delete-action :product="productSelectedDelete" @closeConfirm="closeConfirm"/>
         <edit-action :product="productSelectedEdit" @closeModal="closeEditModalEvent" />
+        <add-product :showModal="showModalAddProductVar" @closeModal="closeModalAddProduct" />
         
     </app-layout>
 </template>
@@ -36,6 +44,8 @@
     import DetailsModal from './DetailsModal'
     import DeleteAction from './DeleteAction'
     import EditAction from './EditAction'
+    import JetDropdown from '@/Jetstream/Dropdown'
+    import AddProduct from './AddProduct'
 
     export default {
         data() {
@@ -44,6 +54,7 @@
                 productSelectedDelete: {},
                 productSelectedEdit: {},
                 showEditModal: false,
+                showModalAddProductVar: false
             }
         },
         components: {
@@ -52,7 +63,9 @@
             Pagination,
             DetailsModal,
             DeleteAction,
-            EditAction
+            EditAction,
+            JetDropdown,
+            AddProduct
         },
         props: {
             products: Object,
@@ -75,6 +88,12 @@
             },
             showEditModalEvent(product){
                 this.productSelectedEdit = product
+            },
+            showModalAddProduct(){
+                this.showModalAddProductVar = true
+            },
+            closeModalAddProduct(){
+                this.showModalAddProductVar = false
             }
         }
     }

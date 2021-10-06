@@ -34,5 +34,6 @@ Route::middleware([ 'auth:sanctum', 'verified', ])
         Route::get('/products', [ ProductsController::class, 'show' ])->name('products');
         Route::post('/product/remove', [ ProductsController::class, 'delete' ])->name('product.delete');
         Route::post('/product/edit', [ ProductsController::class, 'edit' ])->name('product.edit');
+        Route::post('/product/add', [ ProductsController::class, 'add' ])->name('product.add');
 });
 
