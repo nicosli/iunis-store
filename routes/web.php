@@ -26,7 +26,8 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/front/products', [FrontProductsController::class, 'show'])->name('front.products.list');
+Route::get('/front/products', [FrontProductsController::class, 'list'])->name('front.products.list');
+Route::get('/front/products/{hashProduct}', [FrontProductsController::class, 'show'])->name('front.products.show');
 
 Route::middleware([ 'auth:sanctum', 'verified', ])
     ->group(function () {

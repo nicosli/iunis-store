@@ -60,7 +60,7 @@
 
             <!-- Page Content -->
             <main>
-                <slot></slot>
+                <slot name="content"></slot>
             </main>
         </div>
         
@@ -125,7 +125,7 @@
 
         data() {
             return {
-                showingNavigationDropdown: false,
+                
             }
         },
 
