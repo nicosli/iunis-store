@@ -17,8 +17,34 @@ class FrontProductsController extends Controller
 
     public function show($hashProduct){
         $product = Products::byHashOrFail($hashProduct);
+
+        \MercadoPago\SDK::setAccessToken(config('mercadopago.ACCESS_TOKEN'));
+
+        // Crea un objeto de preferencia
+        $preference = new \MercadoPago\Preference();
+
+        // Crea un ítem en la preferencia
+        $item = new \MercadoPago\Item();
+        $item->title = $product->name;
+        $item->quantity = 1;
+        $item->currency_id = "MXN";
+        $item->unit_price = $product->public_price;
+
+        $preference->items = array($item);
+        
+        $preference->back_urls = array(
+            "success" => asset('/success'),
+            "failure" => asset('/failure'),
+            "pending" => asset('/pending')
+        );
+        $preference->auto_return = "approved";
+        
+        $preference->save();
+
         return Inertia::render('Frontend/Products/Show', [
-            'product' => new ProductResource($product)
+            'product' => new ProductResource($product),
+            'preference_id' => $preference->id,
         ]);
     }
+
 }
